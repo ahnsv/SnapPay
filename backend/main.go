@@ -24,4 +24,8 @@ func main() {
 
 	// Launch server with CORS validations
 	log.Fatal(http.ListenAndServe(":"+port, handlers.CORS(allowedOrigins, allowedMethods)(router)))
+
+	// if everything works fine, proceed with transaction in NAVER PAY
+	// something to pop up NAVER PAY html file
+	// returns transaction result and sends it to database
 }
