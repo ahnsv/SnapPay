@@ -1,36 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
+<!doctype html>
+<html>
+  <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Naver Pay Shopping cart popup</title>
-    <script type="text/javascript" src="//pay.naver.com/customer/js/naverPayButton.js"></script>
-</head>
-
-<body>
-    <script>
-        naver.NaverPayButton.apply({
-            BUTTON_KEY: "네이버에서 전달받은 버튼생성키",
-            TYPE: "C", //버튼 스타일
-            COLOR: 1, //버튼 색상타입
-            COUNT: 2, // 네이버페이버튼 + 찜하기버튼 모두 출력 여부
-            ENABLE: "Y", //네이버페이 활성여부(재고부족 등에는 N으로 비활성처리)
-            EMBED_ID: "iamport-naverpay-product-button", //네이버페이 버튼 UI가 부착될 HTML element의 ID
-            BUY_BUTTON_HANDLER: function () {
-                //중략
-                //핸들러 내에서 아임포트 네이버페이 결제 함수 호출
-                IMP.request_pay(param);
-            },
-            WISHLIST_BUTTON_HANDLER: function () {
-                //중략
-
-                //핸들러 내에서 아임포트 네이버페이 찜하기 함수 호출(iamport.payment-1.1.6.js부터 지원됨)
-                IMP.naver_zzim(param);
-            }
-        });
-    </script>
-</body>
-
+    <title>Getting Started Extension's Popup</title>
+    <style>
+      body {
+        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-size: 100%;
+      }
+    </style>
+    <script src="js/vendor.js"></script>
+  </head>
+  <body>
+    <ul style="min-width: 700px;">
+    <li>Current URL: <span id="url"></span></li>
+    <li>Current Time: <span id="time"></span></li>
+    </ul>
+    <button id="countUp">count up</button>
+    <button id="changeBackground">change background</button>
+    <script src="../build/popup.js"></script>
+  </body>
 </html>
