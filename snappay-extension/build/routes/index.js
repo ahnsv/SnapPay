@@ -1,47 +1,21 @@
 "use strict";
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var express = require("express");
-var fs = require("fs");
-var products_json_1 = __importDefault(require("../data/products.json"));
-var router = express.Router();
-var Cart = require('../models/cart');
-var products = JSON.parse(fs.readFileSync(products_json_1.default, 'utf8'));
-router.get('/', function (req, res, next) {
-    res.render('index', {
-        title: 'NodeJS Shopping Cart',
-        products: products
-    });
+var express = __importStar(require("express"));
+var addRouter_1 = __importDefault(require("./addRouter"));
+var cartRouter_1 = __importDefault(require("./cartRouter"));
+var removeRouter_1 = __importDefault(require("./removeRouter"));
+module.exports = (function () {
+    var r = express.Router();
+    r.use('/add/:id', addRouter_1.default);
+    r.use('/card', cartRouter_1.default);
+    r.use('/remove', removeRouter_1.default);
 });
-router.get('/add/:id', function (req, res, next) {
-    var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {});
-    var product = products.filter(function (item) {
-        return item.id == productId;
-    });
-    cart.add(product[0], productId);
-    req.session.cart = cart;
-    res.redirect('/');
-});
-router.get('/cart', function (req, res, next) {
-    if (!req.session.cart) {
-        return res.render('cart', {
-            products: null
-        });
-    }
-    var cart = new Cart(req.session.cart);
-    res.render('cart', {
-        title: 'NodeJS Shopping Cart',
-        products: cart.getItems(),
-        totalPrice: cart.totalPrice
-    });
-});
-router.get('/remove/:id', function (req, res, next) {
-    var productId = req.params.id;
-    var cart = new Cart(req.session.cart ? req.session.cart : {});
-    cart.remove(productId);
-    req.session.cart = cart;
-    res.redirect('/cart');
-});
-module.exports = router;
