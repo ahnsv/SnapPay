@@ -3,10 +3,13 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        popup: path.join(__dirname, '../dist/popup.ts'),
+        popup: path.join(__dirname, '../src/chrome/popup.ts'),
+        background: path.join(__dirname, '../src/chrome/background.ts'),
+        options: path.join(__dirname, '../src/chrome/options.ts'),
+        content_scripts: path.join(__dirname, '../src/chrome/content_scripts.ts')
     },
     output: {
-        path: path.join(__dirname, '../build/'),
+        path: path.join(__dirname, '../dist/js'),
         filename: '[name].js'
     },
     optimization: {

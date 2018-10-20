@@ -1,11 +1,18 @@
 {
   "manifest_version": 2,
 
-  "name": "Chrome Extension TypeScript Starter",
-  "description": "Chrome Extension, TypeScript, Visual Studio Code",
+  "name": "SnapPay",
+  "description": "SnayPay Extension",
   "version": "1.0",
   "browser_action": {
+    "default_icon": "finger_snap.jpg",
     "default_popup": "popup.html"
   },
-  "permissions": ["storage", "<all_urls>"]
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "permissions": ["storage", "<all_urls>"],
+  "content_security_policy": "default-src 'self'; script-src 'self' https://code.jquery.com https://cdnjs.cloudflare.com https://maxcdn.bootstrapcdn.com; style-src 'self' https://maxcdn.bootstrapcdn.com data:; img-src 'self' data:;"
 }
